@@ -49,6 +49,8 @@ public final class Notez {
               // without having to spend lots of time messing with command line arguments.
             else if (argv[0].equals("-c")) {
                 ntzEngine.addToCategory(argv[1], argv);
+            } else if (argv[0].equals("-f")) {
+                ntzEngine.forgetNote(argv[1], Integer.parseInt(argv[2]));
             }
         }
         /*
@@ -66,7 +68,13 @@ public final class Notez {
         }
         filemap.get(string).add(argv[1]);
     }
-
+    public void forgetNote(String string, int index) {
+        if (filemap.containsKey(string)) {
+            filemap.get(string).remove(index);
+        } else {
+            System.out.println("We h0t");
+        }
+    }
     private void saveDatabase() {
         filemap.save();
     }

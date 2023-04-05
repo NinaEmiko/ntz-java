@@ -50,7 +50,9 @@ public final class Notez {
             else if (argv[0].equals("-c")) {
                 ntzEngine.addToCategory(argv[1], argv);
             } else if (argv[0].equals("-f")) {
-                ntzEngine.forgetNote(argv[1], Integer.parseInt(argv[2]));
+                ntzEngine.forgetNote(argv[1], Integer.parseInt(argv[2]) - 1);
+            } else if (argv[0].equals("-e")){
+                ntzEngine.replaceNote(argv[1], Integer.parseInt(argv[2]) - 1, argv[3]);
             }
         }
         /*
@@ -73,6 +75,12 @@ public final class Notez {
             filemap.get(string).remove(index);
         } else {
             System.out.println("We h0t");
+        }
+    }
+
+    public void replaceNote(String string, int index, String newMessage) {
+        if (filemap.containsKey(string)) {
+            filemap.get(string).set(index, newMessage);
         }
     }
     private void saveDatabase() {
